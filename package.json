@@ -1,0 +1,31 @@
+{
+  "name": "i-fak-u",
+  "version": "0.0.1",
+  "description": "i fak u tests",
+  "keywords": [],
+  "main": "",
+  "scripts": {
+    "test": "./test/test.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webbestmaster/i-fak-u.git"
+  },
+  "author": "webbestmaster",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webbestmaster/i-fak-u/issues"
+  },
+  "homepage": "https://github.com/webbestmaster/i-fak-u#readme",
+  "dependencies": {
+    "canvas": "^1.6.2",
+    "node-resemble": "^1.1.3",
+    "selenium-webdriver": "^3.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dot": "^1.1.1",
+    "mochawesome": "^2.0.2",
+    "selenium-screen-master": "*"
+  }
+}

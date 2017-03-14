@@ -5,8 +5,7 @@
 const {
     Ssm,
     assert,
-    util,
-    addContext,
+    addComparing,
     WebDriver,
     SITE_URL,
     WEB_DRIVER_SERVER_URL,
@@ -51,25 +50,7 @@ describe('selenium screen master test', function () {
             .compareOfSelector('.main-header__aside', './header.png')
             .then(comparing => {
 
-                addContext(this, {
-                    title: 'Actual',
-                    value: util.createTag('img', ['src', comparing.actual])
-                });
-
-                addContext(this, {
-                    title: 'Expect',
-                    value: util.createTag('img', ['src', comparing.expect])
-                });
-
-                addContext(this, {
-                    title: 'Different',
-                    value: util.createTag('img', ['src', comparing.different])
-                });
-
-                addContext(this, {
-                    title: 'Different Info',
-                    value: comparing.info
-                });
+                addComparing(comparing, this);
 
                 assert(comparing.info.misMatchPercentage === 0, 'Should be the same images');
 

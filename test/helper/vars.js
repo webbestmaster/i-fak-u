@@ -22,11 +22,35 @@ const server = new SeleniumServer('./driver/selenium-server-standalone-3.0.1.jar
 
 const TEST_MODE = (new Ssm()).MODE.COLLECT; // TEST || COLLECT
 
+function addComparing(comparing, context) {
+
+    addContext(context, {
+        title: 'Actual',
+        value: util.createTag('img', ['src', comparing.actual])
+    });
+
+    addContext(context, {
+        title: 'Expect',
+        value: util.createTag('img', ['src', comparing.expect])
+    });
+
+    addContext(context, {
+        title: 'Different',
+        value: util.createTag('img', ['src', comparing.different])
+    });
+
+    addContext(context, {
+        title: 'Different Info',
+        value: comparing.info
+    });
+
+}
+
 module.exports = {
     Ssm,
     assert,
     util,
-    addContext,
+    addComparing,
     WebDriver,
     SITE_URL,
     WEB_DRIVER_SERVER_URL,

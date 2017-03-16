@@ -22,6 +22,11 @@ Run test
 
 >$ npm test
 
+OR
+
+>MODE=COLLECT ./test/run-single.sh ./test/country.js 
+>MODE=TEST ./test/run-single.sh ./test/country.js <=> ./test/run-single.sh ./test/country.js
+
 #### Recommendations
 
 Use for test mocha + mochawesome + mochawesome/addContext + chai.<br />

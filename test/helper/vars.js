@@ -4,6 +4,8 @@ const WebDriver = require('selenium-webdriver');
 const Ssm = require('selenium-screen-master');
 const addContext = require('mochawesome/addContext');
 
+const byCss = WebDriver.By.css;
+
 const resemble = require('node-resemble');
 const assert = require('chai').assert;
 const util = require('./test-util');
@@ -20,31 +22,9 @@ const server = new SeleniumServer('./driver/selenium-server-standalone-3.0.1.jar
     jvmArgs: ['-Dwebdriver.chrome.driver=./driver/' + OS_NAME + '/chromedriver']
 });
 
-const TEST_MODE = (new Ssm()).MODE.COLLECT; // TEST || COLLECT
+const TEST_MODE = process.env.MODE || (new Ssm()).MODE.TEST; // TEST || COLLECT
 
-function addComparing(comparing, context) {
-
-    addContext(context, {
-        title: 'Actual',
-        value: util.createTag('img', ['src', comparing.actual])
-    });
-
-    addContext(context, {
-        title: 'Expect',
-        value: util.createTag('img', ['src', comparing.expect])
-    });
-
-    addContext(context, {
-        title: 'Different',
-        value: util.createTag('img', ['src', comparing.different])
-    });
-
-    addContext(context, {
-        title: 'Different Info',
-        value: comparing.info
-    });
-
-}
+const addComparing = util.addComparing;
 
 module.exports = {
     Ssm,
@@ -55,5 +35,6 @@ module.exports = {
     SITE_URL,
     WEB_DRIVER_SERVER_URL,
     server,
-    TEST_MODE
+    TEST_MODE,
+    byCss
 };

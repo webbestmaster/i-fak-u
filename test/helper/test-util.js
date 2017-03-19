@@ -4,9 +4,9 @@ const addContext = require('mochawesome/addContext');
 
 const CREATE_TAG_TEMPLATE_FUNCTION = dot.template(
     '<{{= it.tagName }}' +
-    '{{~it.attributeList :value:index}}' +
-    '{{= index % 2 ? (value + \'"\') : (\' \' + value + \'="\') }}' +
-    '{{~}}' +
+        '{{~it.attributeList :value:index}}' +
+            '{{= index % 2 ? (value + \'"\') : (\' \' + value + \'="\') }}' +
+        '{{~}}' +
     '></{{= it.tagName }}>'
 );
 

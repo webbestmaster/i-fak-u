@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# example
+# ./test/run-single.sh ./test/country.js
+
 now="$(date +'%Y-%m-%d-%H-%M-%S')"
 reportsFolder=./reports
 reportName=single-test-$now

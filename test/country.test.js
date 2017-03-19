@@ -3,15 +3,11 @@
 "use strict";
 
 const {
-    Ssm,
     assert,
     addComparing,
-    WebDriver,
     SITE_URL,
-    WEB_DRIVER_SERVER_URL,
     server,
-    TEST_MODE,
-    byCss
+    beforeEachInitialization
 } = require('./helper/vars');
 
 describe('localization test', function () {
@@ -26,18 +22,12 @@ describe('localization test', function () {
     after(() => server.stop());
 
     beforeEach(() => {
-        driver = new WebDriver
-            .Builder()
-            .usingServer(WEB_DRIVER_SERVER_URL)
-            .withCapabilities({'browserName': 'chrome'})
-            .build();
 
-        ssm = new Ssm();
-        ssm.setMode(TEST_MODE);
-        ssm.setPathToReferenceFolder('./ssm-ref-folder');
-        ssm.setDriver(driver);
+        const result = beforeEachInitialization();
+        ssm = result.ssm;
+        driver = result.driver;
 
-        return ssm.setSize(1024, 768);
+        return result.promise;
 
     });
 
@@ -47,11 +37,11 @@ describe('localization test', function () {
 
         driver.get(SITE_URL);
 
-        driver.findElement(byCss('.lang-bar__base')).click();
+        driver.findElement({css: '.lang-bar__base'}).click();
 
-        driver.findElement(byCss('.lang-bar__footer')).click();
+        driver.findElement({css: '.lang-bar__footer'}).click();
 
-        driver.findElement(byCss('.popup-form option[value="aw"]')).click();
+        driver.findElement({css: '.popup-form option[value="aw"]'}).click();
 
         ssm
             .compareOfSelector('.popup-content', './popup-content.png')
@@ -63,7 +53,7 @@ describe('localization test', function () {
 
             });
 
-        return driver.findElement(byCss('.popup-form select'))
+        return driver.findElement({css: '.popup-form select'})
             .getAttribute('value')
             .then(value => assert(value === 'aw'));
 
